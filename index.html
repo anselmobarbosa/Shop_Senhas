@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de Senhas de Lojas</title>
+    <!-- Link para o Tailwind CSS (online) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Link para a fonte Inter (online) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Link para o seu arquivo de CSS local -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-4xl">
+        
+        <header class="text-center mb-8 relative">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900">Gerenciador de Senhas de Lojas</h1>
+            <p class="text-gray-600 mt-2">Adicione e encontre facilmente as senhas dos cadeados das suas lojas.</p>
+        </header>
+
+        <main class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <div class="flex flex-col gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <h2 class="text-xl font-semibold mb-4 border-b pb-2">Adicionar Nova Loja</h2>
+                    <form id="add-store-form" class="space-y-4">
+                        <div>
+                            <label for="store-number" class="block text-sm font-medium text-gray-700">Número da Loja</label>
+                            <input type="text" id="store-number" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm" placeholder="Ex: 101" required>
+                        </div>
+                        <div>
+                            <label for="store-password" class="block text-sm font-medium text-gray-700">Senha do Cadeado</label>
+                            <input type="text" id="store-password" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm" placeholder="Ex: 1234" required>
+                        </div>
+                        <button type="submit" class="w-full bg-indigo-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-indigo-700">Adicionar Loja</button>
+                    </form>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <h2 class="text-xl font-semibold mb-4 border-b pb-2">Importar em Massa</h2>
+                    <form id="import-form" class="space-y-4">
+                        <textarea id="bulk-import-data" rows="6" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm" placeholder="101,1234&#10;102,5678"></textarea>
+                        <button type="submit" class="w-full bg-teal-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-teal-700">Importar Lojas</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="flex flex-col gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <h2 class="text-xl font-semibold mb-4 border-b pb-2">Pesquisar Senha</h2>
+                    <input type="text" id="search-store-number" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm" placeholder="Digite o número para buscar...">
+                    <div id="search-result" class="mt-4 p-4 bg-gray-50 rounded-lg min-h-[80px] flex items-center justify-center">
+                        <span class="text-gray-500">A senha aparecerá aqui.</span>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-md flex-grow">
+                    <h2 class="text-xl font-semibold mb-4 border-b pb-2">Lojas Cadastradas</h2>
+                    <div id="store-list-container" class="max-h-[400px] overflow-y-auto pr-2">
+                        <ul id="store-list" class="space-y-3"></ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <div id="toast" class="toast"></div>
+    </div>
+
+    <!-- Link para o seu arquivo JavaScript local -->
+    <script src="script.js"></script>
+</body>
+</html>
