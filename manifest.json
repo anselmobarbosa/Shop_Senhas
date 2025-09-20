@@ -8,12 +8,12 @@
   "theme_color": "#4f46e5",
   "icons": [
     {
-      "src": "ICONE SENHAS 2.png",
+      "src": "icon-192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "ICONE SENHAS 1.png",
+      "src": "icon-512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
