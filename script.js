@@ -150,24 +150,34 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
     
+    // ===================================================================
+    // FUNÇÃO IMPORTSTORES MELHORADA (FOCO NA SOLUÇÃO)
+    // ===================================================================
     const importStores = (e) => {
         e.preventDefault();
         const data = bulkImportData.value.trim();
         if (!data) return;
 
         const batch = db.batch();
-        const lines = data.split('\n');
+        const lines = data.split('\n'); // Divide por quebra de linha
         let importedCount = 0;
         let duplicateCount = 0;
 
         lines.forEach(line => {
-            const parts = line.split(/[,;\t]/).map(part => part.trim());
+            const trimmedLine = line.trim();
+            if (!trimmedLine) return; // Pula linhas em branco
+            
+            // Usa RegEx para dividir por um ou mais de [, ; \t] e remove entradas vazias com filter(Boolean)
+            const parts = trimmedLine.split(/[,;\t]+/).filter(Boolean).map(part => part.trim());
+
             if (parts.length === 2) {
                 const [number, password] = parts;
+                
                 if (number && password) {
                     if (!localStores.some(store => store.number === number)) {
+                        // Cria uma nova referência de documento com ID automático
                         const newStoreRef = db.collection('lojas').doc();
-                        batch.set(newStoreRef, { number, password });
+                        batch.set(newStoreRef, { number, password }); // Adiciona ao batch
                         importedCount++;
                     } else {
                         duplicateCount++;
@@ -176,6 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
+        // Commit do batch para salvar todas as operações de uma vez
         batch.commit()
             .then(() => {
                 showToast(`${importedCount} loja(s) importada(s). ${duplicateCount} duplicada(s).`);
@@ -204,3 +215,5 @@ if ('serviceWorker' in navigator) {
     });
   });
 }
+
+   
